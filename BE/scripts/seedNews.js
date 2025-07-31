@@ -4,7 +4,7 @@ const News = require('../model/News.model');
 // Kết nối database
 const connectDB = async () => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/ltw', {
+    await mongoose.connect('mongodb://localhost:27017/mydb', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

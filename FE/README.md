@@ -115,3 +115,7 @@ src/
 - **Email**: info@congthongtin.gov.vn
 - **Phone**: (028) 1234 5678
 - **Website**: www.congthongtin.gov.vn
+
+
+admin@example.com
+admin123

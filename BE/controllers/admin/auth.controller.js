@@ -18,7 +18,7 @@ const generateToken = (user) => {
 
 // Dang ki
 module.exports.register = async (req, res) => {
-    const { fullName, email, password, phone } = req.body;
+    const { fullName, email, password, phone, role_id } = req.body;
 
     try {
         const existingUser = await Account.findOne({ email });
@@ -31,11 +31,19 @@ module.exports.register = async (req, res) => {
             email,
             password: hashedPassword,
             phone,
+            role_id: role_id || "user", // Mặc định là user, có thể set admin
             status: "active"
         });
 
         await newUser.save();
-        res.status(201).json({ message: "Register successful" });
+        res.status(201).json({ 
+            message: "Register successful",
+            user: {
+                fullName: newUser.fullName,
+                email: newUser.email,
+                role_id: newUser.role_id
+            }
+        });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
