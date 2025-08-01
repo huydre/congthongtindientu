@@ -123,3 +123,91 @@ module.exports.detailNews = async (req, res) => {
         })
     }
 }
+
+// [PUT] update news
+module.exports.updateNews = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { title, contentHtml, author, status } = req.body;
+
+        // Tìm tin tức cần cập nhật
+        const news = await News.findById(id);
+        if (!news) {
+            return res.status(404).json({
+                success: false,
+                message: 'Không tìm thấy tin tức'
+            });
+        }
+
+        // Cập nhật thông tin
+        const updateData = {
+            title: title || news.title,
+            contentHtml: contentHtml || news.contentHtml,
+            author: author || news.author,
+            status: status || news.status,
+            updatedAt: new Date()
+        };
+
+        // Xử lý ảnh mới nếu có
+        if (req.file) {
+            updateData.thumbnail = `/uploads/${req.file.filename}`;
+        }
+
+        const updatedNews = await News.findByIdAndUpdate(
+            id,
+            updateData,
+            { new: true, runValidators: true }
+        );
+
+        res.json({
+            success: true,
+            data: updatedNews,
+            message: 'Cập nhật tin tức thành công!'
+        });
+    } catch (error) {
+        console.error('Error updating news:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Có lỗi xảy ra khi cập nhật tin tức',
+            error: error.message
+        });
+    }
+}
+
+// [DELETE] delete news
+module.exports.deleteNews = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Tìm tin tức cần xóa
+        const news = await News.findById(id);
+        if (!news) {
+            return res.status(404).json({
+                success: false,
+                message: 'Không tìm thấy tin tức'
+            });
+        }
+
+        // Xóa tin tức (soft delete hoặc hard delete)
+        // Soft delete - đánh dấu là đã xóa
+        await News.findByIdAndUpdate(id, { 
+            deleted: true,
+            deletedAt: new Date()
+        });
+
+        // Hoặc hard delete - xóa hoàn toàn
+        // await News.findByIdAndDelete(id);
+
+        res.json({
+            success: true,
+            message: 'Xóa tin tức thành công!'
+        });
+    } catch (error) {
+        console.error('Error deleting news:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Có lỗi xảy ra khi xóa tin tức',
+            error: error.message
+        });
+    }
+}

@@ -77,15 +77,15 @@ const NewsManagement = () => {
           <h1 className="text-2xl font-bold text-gray-900">Quản lý Tin tức</h1>
           <p className="text-gray-600">Quản lý tất cả tin tức và bài viết</p>
         </div>
-        <Link
+        <button
           to="/admin/news/create"
           className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center"
         >
-          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 mr-2 text-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
           </svg>
           Tạo tin tức mới
-        </Link>
+        </button>
       </div>
 
       {/* Filters */}

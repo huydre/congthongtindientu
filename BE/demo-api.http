@@ -1,0 +1,205 @@
+# Demo API Test File
+# Sử dụng REST Client extension trong VS Code để test
+# Hoặc copy các request vào Postman/Insomnia
+
+### 1. Test Server Health
+GET http://localhost:3000/
+Content-Type: application/json
+
+###
+
+### 2. Đăng ký tài khoản mới
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "email": "test@example.com",
+  "password": "123456",
+  "fullName": "Test User",
+  "role": "user"
+}
+
+###
+
+### 3. Đăng nhập
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "123456"
+}
+
+###
+
+### 4. Đăng ký Admin
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "email": "admin@example.com",
+  "password": "admin123",
+  "fullName": "Administrator",
+  "role": "admin"
+}
+
+###
+
+### 5. Đăng nhập Admin
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "admin123"
+}
+
+###
+
+### 6. Test Admin API Health
+GET http://localhost:3000/admin/
+Content-Type: application/json
+Authorization: Bearer YOUR_ADMIN_TOKEN_HERE
+
+###
+
+### 7. Lấy danh sách tin tức (Admin)
+GET http://localhost:3000/admin/news
+Content-Type: application/json
+Authorization: Bearer YOUR_ADMIN_TOKEN_HERE
+
+###
+
+### 8. Tạo tin tức mới (Admin)
+POST http://localhost:3000/admin/news
+Content-Type: application/json
+Authorization: Bearer YOUR_ADMIN_TOKEN_HERE
+
+{
+  "title": "Tin tức demo",
+  "content": "Nội dung tin tức demo để test API",
+  "author": "Admin",
+  "status": "published",
+  "featured": true,
+  "tags": ["demo", "test", "api"]
+}
+
+###
+
+### 9. Cập nhật tin tức (Admin)
+PUT http://localhost:3000/admin/news/NEWS_ID_HERE
+Content-Type: application/json
+Authorization: Bearer YOUR_ADMIN_TOKEN_HERE
+
+{
+  "title": "Tin tức đã cập nhật",
+  "content": "Nội dung đã được cập nhật",
+  "status": "published",
+  "featured": false
+}
+
+###
+
+### 10. Xóa tin tức (Admin)
+DELETE http://localhost:3000/admin/news/NEWS_ID_HERE
+Content-Type: application/json
+Authorization: Bearer YOUR_ADMIN_TOKEN_HERE
+
+###
+
+### 11. Lấy danh sách người dùng (Admin)
+GET http://localhost:3000/admin/users
+Content-Type: application/json
+Authorization: Bearer YOUR_ADMIN_TOKEN_HERE
+
+###
+
+### 12. Cập nhật thông tin người dùng (Admin)
+PUT http://localhost:3000/admin/users/USER_ID_HERE
+Content-Type: application/json
+Authorization: Bearer YOUR_ADMIN_TOKEN_HERE
+
+{
+  "role": "admin",
+  "status": "active"
+}
+
+###
+
+### 13. Xóa người dùng (Admin)
+DELETE http://localhost:3000/admin/users/USER_ID_HERE
+Content-Type: application/json
+Authorization: Bearer YOUR_ADMIN_TOKEN_HERE
+
+###
+
+### 14. Lấy tin tức cho trang chủ (Client)
+GET http://localhost:3000/
+Content-Type: application/json
+
+###
+
+### 15. Lấy chi tiết tin tức (Client)
+GET http://localhost:3000/news/NEWS_ID_HERE
+Content-Type: application/json
+
+###
+
+### 16. Tạo tin tức mới (Client)
+POST http://localhost:3000/news/postnews
+Content-Type: application/json
+
+{
+  "title": "Tin tức từ client",
+  "contentHtml": "<h2>Nội dung tin tức</h2><p>Đây là nội dung tin tức được tạo từ client.</p>",
+  "author": "Client User",
+  "status": "draft"
+}
+
+###
+
+### 17. Cập nhật tin tức (Client)
+PUT http://localhost:3000/news/NEWS_ID_HERE
+Content-Type: application/json
+
+{
+  "title": "Tin tức đã cập nhật từ client",
+  "contentHtml": "<h2>Nội dung đã cập nhật</h2><p>Nội dung tin tức đã được cập nhật.</p>",
+  "status": "published"
+}
+
+###
+
+### 18. Xóa tin tức (Client)
+DELETE http://localhost:3000/news/NEWS_ID_HERE
+Content-Type: application/json
+
+###
+
+### 19. Gửi liên hệ (Client)
+POST http://localhost:3000/contact
+Content-Type: application/json
+
+{
+  "name": "Nguyễn Văn A",
+  "email": "contact@example.com",
+  "subject": "Liên hệ demo",
+  "message": "Đây là tin nhắn demo để test API liên hệ"
+}
+
+###
+
+### 20. Đăng xuất
+GET http://localhost:3000/auth/logout
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN_HERE
+
+###
+
+# Hướng dẫn sử dụng:
+# 1. Thay thế YOUR_TOKEN_HERE bằng token thực từ response đăng nhập
+# 2. Thay thế NEWS_ID_HERE và USER_ID_HERE bằng ID thực từ database
+# 3. Sử dụng REST Client extension trong VS Code để test trực tiếp
+# 4. Hoặc copy request vào Postman/Insomnia
