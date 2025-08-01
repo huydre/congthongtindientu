@@ -109,45 +109,93 @@ Authorization: Bearer YOUR_ADMIN_TOKEN_HERE
 
 ###
 
-### 11. Lấy danh sách người dùng (Admin)
+### 11. Lấy thống kê người dùng (Admin)
+GET http://localhost:3000/admin/users/stats
+Content-Type: application/json
+Authorization: Bearer YOUR_ADMIN_TOKEN_HERE
+
+###
+
+### 12. Lấy danh sách người dùng (Admin)
 GET http://localhost:3000/admin/users
 Content-Type: application/json
 Authorization: Bearer YOUR_ADMIN_TOKEN_HERE
 
 ###
 
-### 12. Cập nhật thông tin người dùng (Admin)
+### 13. Lấy danh sách người dùng với filter (Admin)
+GET http://localhost:3000/admin/users?page=1&limit=5&role=user&search=test
+Content-Type: application/json
+Authorization: Bearer YOUR_ADMIN_TOKEN_HERE
+
+###
+
+### 14. Lấy thông tin chi tiết người dùng (Admin)
+GET http://localhost:3000/admin/users/USER_ID_HERE
+Content-Type: application/json
+Authorization: Bearer YOUR_ADMIN_TOKEN_HERE
+
+###
+
+### 15. Tạo người dùng mới (Admin)
+POST http://localhost:3000/admin/users
+Content-Type: application/json
+Authorization: Bearer YOUR_ADMIN_TOKEN_HERE
+
+{
+  "username": "newuser",
+  "email": "newuser@example.com",
+  "password": "123456",
+  "fullName": "New User",
+  "role": "user"
+}
+
+###
+
+### 16. Cập nhật thông tin người dùng (Admin)
 PUT http://localhost:3000/admin/users/USER_ID_HERE
 Content-Type: application/json
 Authorization: Bearer YOUR_ADMIN_TOKEN_HERE
 
 {
+  "fullName": "Updated Name",
   "role": "admin",
   "status": "active"
 }
 
 ###
 
-### 13. Xóa người dùng (Admin)
+### 17. Đổi mật khẩu người dùng (Admin)
+PUT http://localhost:3000/admin/users/USER_ID_HERE/password
+Content-Type: application/json
+Authorization: Bearer YOUR_ADMIN_TOKEN_HERE
+
+{
+  "newPassword": "newpassword123"
+}
+
+###
+
+### 18. Xóa người dùng (Admin)
 DELETE http://localhost:3000/admin/users/USER_ID_HERE
 Content-Type: application/json
 Authorization: Bearer YOUR_ADMIN_TOKEN_HERE
 
 ###
 
-### 14. Lấy tin tức cho trang chủ (Client)
+### 19. Lấy tin tức cho trang chủ (Client)
 GET http://localhost:3000/
 Content-Type: application/json
 
 ###
 
-### 15. Lấy chi tiết tin tức (Client)
+### 20. Lấy chi tiết tin tức (Client)
 GET http://localhost:3000/news/NEWS_ID_HERE
 Content-Type: application/json
 
 ###
 
-### 16. Tạo tin tức mới (Client)
+### 21. Tạo tin tức mới (Client)
 POST http://localhost:3000/news/postnews
 Content-Type: application/json
 
@@ -160,7 +208,7 @@ Content-Type: application/json
 
 ###
 
-### 17. Cập nhật tin tức (Client)
+### 22. Cập nhật tin tức (Client)
 PUT http://localhost:3000/news/NEWS_ID_HERE
 Content-Type: application/json
 
@@ -172,13 +220,13 @@ Content-Type: application/json
 
 ###
 
-### 18. Xóa tin tức (Client)
+### 23. Xóa tin tức (Client)
 DELETE http://localhost:3000/news/NEWS_ID_HERE
 Content-Type: application/json
 
 ###
 
-### 19. Gửi liên hệ (Client)
+### 24. Gửi liên hệ (Client)
 POST http://localhost:3000/contact
 Content-Type: application/json
 
@@ -191,7 +239,7 @@ Content-Type: application/json
 
 ###
 
-### 20. Đăng xuất
+### 25. Đăng xuất
 GET http://localhost:3000/auth/logout
 Content-Type: application/json
 Authorization: Bearer YOUR_TOKEN_HERE
